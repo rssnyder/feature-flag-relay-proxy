@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.namespace }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app }}
+    spec:
+      containers:
+      - name: relay-proxy
+        image: {{ .Values.image }}
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PORT
+          value: {{ .Values.port }}
+        - name: ACCOUNT_IDENTIFIER
+          value: {{ .Values.accountId }}
+        - name: ORG_IDENTIFIER
+          value: {{ .Values.orgId }}
+        - name: ADMIN_SERVICE_TOKEN
+          value: {{ .Values.adminServiceToken }}
+        - name: AUTH_SECRET
+          value: {{ .Values.authSecret }}
+        - name: API_KEYS
+          value: {{ .Values.apiKeys }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app }}
+  namespace: {{ .Values.namespace }}
+spec:
+  type: NodePort
+  selector:
+    app: {{ .Values.app }}
+  ports:
+  - name: sdk
+    port: {{ .Values.port }}
+    targetPort: {{ .Values.port }}

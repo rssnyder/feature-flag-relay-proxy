@@ -1,0 +1,48 @@
+service:
+  name: ff relay proxy
+  identifier: ff_relay_proxy
+  orgIdentifier: default
+  projectIdentifier: home_lab
+  serviceDefinition:
+    spec:
+      manifests:
+        - manifest:
+            identifier: main
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: account.global
+                  gitFetchType: Branch
+                  paths:
+                    - deploy/ff-relay-proxy.yaml
+                  repoName: harness-community/feature-flag-relay-proxy
+                  branch: master
+              valuesPaths:
+                - deploy/values.yaml
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+      artifacts:
+        primary:
+          primaryArtifactRef: <+input>
+          sources:
+            - spec:
+                connectorRef: account.dockerhub
+                imagePath: harness/ff-proxy
+                tag: <+input>
+                digest: ""
+              identifier: main
+              type: DockerRegistry
+      variables:
+        - name: port
+          type: String
+          description: ""
+          required: true
+          value: "7000"
+        - name: replicas
+          type: String
+          description: ""
+          required: true
+          value: "2"
+    type: Kubernetes
