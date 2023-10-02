@@ -18,7 +18,7 @@ service:
                   paths:
                     - deploy/ff-relay-proxy.yaml
                   repoName: harness-community/feature-flag-relay-proxy
-                  branch: master
+                  branch: main
               valuesPaths:
                 - deploy/values.yaml
               skipResourceVersioning: false
