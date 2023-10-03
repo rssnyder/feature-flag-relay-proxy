@@ -44,10 +44,10 @@ metadata:
   name: {{ .Values.app }}
   namespace: {{ .Values.namespace }}
 spec:
-  type: NodePort
+  type: {{ .Values.serviceType }}
   selector:
     app: {{ .Values.app }}
   ports:
   - name: sdk
     port: {{ .Values.port }}
-    targetPort: {{ .Values.port }}
+    targetPort: {{ .Values.targetPort }}
