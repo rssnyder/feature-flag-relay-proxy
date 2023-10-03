@@ -2,7 +2,9 @@ namespace: <+infra.namespace>
 app: <+service.name.toLowerCase().replace("_", "-").replace(" ", "-")>
 
 image: <+artifact.image>
-port: <+serviceVariables.port>
+port: <+ <+empty(serviceVariables.exposedPort)> ? <+serviceVariables.port> : <+serviceVariables.exposedPort> >
+targetPort: <+serviceVariables.port>
+serviceType: <+ <+empty(serviceVariables.serviceType)> ? "NodePort" : <+serviceVariables.serviceType> >
 replicas: <+serviceVariables.replicas>
 
 accountId: <+account.identifier>
