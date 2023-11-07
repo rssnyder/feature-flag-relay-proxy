@@ -2,10 +2,14 @@ namespace: <+infra.namespace>
 app: <+service.name.toLowerCase().replace("_", "-").replace(" ", "-")>
 
 image: <+artifact.image>
-serviceType: <+serviceVariables.serviceType>
+
+service:
+  type: <+serviceVariables.serviceType>
+  port: <+serviceVariables.servicePort>
+
+replicas: <+serviceVariables.replicas>
 
 proxyKey: <+secrets.getValue("PROXY_KEY")>
 authSecret: <+secrets.getValue("AUTH_SECRET")>
 
 redisAddress: <+serviceVariables.redisAddress>
-replicas: <+serviceVariables.replicas>

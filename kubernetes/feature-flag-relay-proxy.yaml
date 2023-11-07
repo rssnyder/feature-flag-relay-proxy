@@ -71,10 +71,10 @@ metadata:
   name: {{ .Values.app }}
   namespace: {{ .Values.namespace }}
 spec:
-  type: {{ .Values.serviceType }}
+  type: {{ .Values.service.type }}
   selector:
     app: {{ .Values.app }}-read-replica
   ports:
   - name: sdk
-    port: {{ .Values.port }}
+    port: {{ .Values.service.port }}
     targetPort: sdk
