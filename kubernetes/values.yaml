@@ -2,14 +2,10 @@ namespace: <+infra.namespace>
 app: <+service.name.toLowerCase().replace("_", "-").replace(" ", "-")>
 
 image: <+artifact.image>
-port: <+serviceVariables.port>
-targetPort: <+serviceVariables.port>
-serviceType: "NodePort"
-replicas: <+serviceVariables.replicas>
+serviceType: <+serviceVariables.serviceType>
 
-accountId: <+account.identifier>
-orgId: <+org.identifier>
-
-adminServiceToken: <+secrets.getValue("ADMIN_SERVICE_TOKEN")>
+proxyKey: <+secrets.getValue("PROXY_KEY")>
 authSecret: <+secrets.getValue("AUTH_SECRET")>
-apiKeys:  <+secrets.getValue("API_KEYS")>
+
+redisAddress: <+serviceVariables.redisAddress>
+replicas: <+serviceVariables.replicas>

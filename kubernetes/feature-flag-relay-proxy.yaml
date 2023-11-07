@@ -10,7 +10,7 @@ metadata:
   name: {{ .Values.app }}
   namespace: {{ .Values.namespace }}
 spec:
-  replicas: {{ .Values.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Values.app }}
@@ -24,23 +24,45 @@ spec:
         image: {{ .Values.image }}
         imagePullPolicy: IfNotPresent
         env:
-        - name: PORT
-          value: {{ .Values.port }}
-        - name: ACCOUNT_IDENTIFIER
-          value: {{ .Values.accountId }}
-        - name: ORG_IDENTIFIER
-          value: {{ .Values.orgId }}
-        - name: ADMIN_SERVICE_TOKEN
-          value: {{ .Values.adminServiceToken }}
+        - name: PROXY_KEY
+          value: {{ .Values.proxyKey }}
+        - name: READ_REPLICA
+          value: false
         - name: AUTH_SECRET
           value: {{ .Values.authSecret }}
-        - name: API_KEYS
-          value: {{ .Values.apiKeys }}
-        {{- if .Values.redis_address }}
         - name: REDIS_ADDRESS
-          value: {{ .Values.redis_address }}
-        {{- end }}
+          value: {{ .Values.redisAddress }}
         
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app }}-read-replica
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app }}-read-replica
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app }}-read-replica
+    spec:
+      containers:
+      - name: relay-proxy-read-replica
+        image: {{ .Values.image }}
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: READ_REPLICA
+          value: true
+        - name: AUTH_SECRET
+          value: {{ .Values.authSecret }}
+        - name: REDIS_ADDRESS
+          value: {{ .Values.redisAddress }}
+        ports:
+        - name: sdk
+          containerPort: 7000
 
 ---
 apiVersion: v1
@@ -51,8 +73,8 @@ metadata:
 spec:
   type: {{ .Values.serviceType }}
   selector:
-    app: {{ .Values.app }}
+    app: {{ .Values.app }}-read-replica
   ports:
   - name: sdk
     port: {{ .Values.port }}
-    targetPort: {{ .Values.targetPort }}
+    targetPort: sdk
