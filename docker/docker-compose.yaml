@@ -9,6 +9,7 @@ services:
       READ_REPLICA: false
       AUTH_SECRET: ${AUTH_SECRET}
       REDIS_ADDRESS: redis:6379
+      LOG_LEVEL: INFO
     ports:
       - ${PRIMARY_PORT:-7000}:7000
   
@@ -19,6 +20,7 @@ services:
       READ_REPLICA: true
       AUTH_SECRET: ${AUTH_SECRET}
       REDIS_ADDRESS: redis:6379
+      LOG_LEVEL: INFO
     ports:
       - ${REPLICA0_PORT:-7001}:7000
   
@@ -29,6 +31,7 @@ services:
       READ_REPLICA: true
       AUTH_SECRET: ${AUTH_SECRET}
       REDIS_ADDRESS: redis:6379
+      LOG_LEVEL: INFO
     ports:
       - ${REPLICA1_PORT:-7002}:7000
 

@@ -16,10 +16,29 @@ resources for deploying the relay proxy for harness feature flags
 
 the two things you will need to deploy the relay proxy:
 
-- ADMIN_SERVICE_TOKEN: a harness api key with project viewer for the projects in which the proxy will cover
-  - a single relay proxy instance can cover any combination of projects under a single organization, so an org view key is reccomended
-- API_KEYS: server sdk keys for each environment you want the proxy to allow connections for
-  - when using multiple sdk keys, seperate them with a comma
+- PROXY_KEY: a relay proxy key with some associated org(s), project(s), and environment(s)
+- AUTH_SECRET: used to sign JWT tokens that the proxy generates during /auth requests
+
+To create a proxy key:
+
+```
+curl "https://app.harness.io/gateway/cf/admin/proxy/keys?accountIdentifier=$HARNESS_ACCOUNT_ID" \
+--header 'Content-Type: application/json' \
+--header "x-api-key: $HARNESS_PLATFORM_API_KEY" \
+--data '
+{
+  "name": "default",
+  "identifier": "default",
+  "description": "proxy key for the default org",
+  "organizations": {
+    "default": {
+      "projects": {
+        "home_lab": { "scope": "all" }
+      }
+    }
+  }
+}'
+```
 
 # further documentation
 

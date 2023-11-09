@@ -13,3 +13,5 @@ proxyKey: <+secrets.getValue("PROXY_KEY")>
 authSecret: <+secrets.getValue("AUTH_SECRET")>
 
 redisAddress: <+serviceVariables.redisAddress>
+
+logLevel: <+serviceVariables.logLevel>
