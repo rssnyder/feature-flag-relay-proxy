@@ -71,8 +71,8 @@ pipeline:
                             - 7002
               - step:
                   type: Run
-                  name: run test
-                  identifier: run_test
+                  name: run test0
+                  identifier: run_test0
                   spec:
                     shell: Sh
                     command: cd test && pip3 install -r requirements.txt && python3 toggle_flag_validate.py
@@ -83,13 +83,37 @@ pipeline:
                       HARNESS_PROJECT_ID: <+project.identifier>
                       HARNESS_ENVIRONMENT_ID: development
                       HARNESS_PLATFORM_API_KEY: <+secrets.getValue("ADMIN_SERVICE_TOKEN")>
-                      RELAY_PROXY_ADDRESS: http://localhost:<+matrix.port>
-                  strategy:
-                    matrix:
-                      port:
-                        - 7000
-                        - 7001
-                        - 7002
+                      RELAY_PROXY_ADDRESS: http://localhost:7000
+              - step:
+                  type: Run
+                  name: run test1
+                  identifier: run_test1
+                  spec:
+                    shell: Sh
+                    command: cd test && pip3 install -r requirements.txt && python3 toggle_flag_validate.py
+                    envVariables:
+                      FF_SDK_KEY: <+secrets.getValue("API_KEYS")>
+                      HARNESS_ACCOUNT_IDENTIFIER: <+account.identifier>
+                      HARNESS_ORGANIZATION_ID: <+org.identifier>
+                      HARNESS_PROJECT_ID: <+project.identifier>
+                      HARNESS_ENVIRONMENT_ID: development
+                      HARNESS_PLATFORM_API_KEY: <+secrets.getValue("ADMIN_SERVICE_TOKEN")>
+                      RELAY_PROXY_ADDRESS: http://localhost:7001
+              - step:
+                  type: Run
+                  name: run test2
+                  identifier: run_test2
+                  spec:
+                    shell: Sh
+                    command: cd test && pip3 install -r requirements.txt && python3 toggle_flag_validate.py
+                    envVariables:
+                      FF_SDK_KEY: <+secrets.getValue("API_KEYS")>
+                      HARNESS_ACCOUNT_IDENTIFIER: <+account.identifier>
+                      HARNESS_ORGANIZATION_ID: <+org.identifier>
+                      HARNESS_PROJECT_ID: <+project.identifier>
+                      HARNESS_ENVIRONMENT_ID: development
+                      HARNESS_PLATFORM_API_KEY: <+secrets.getValue("ADMIN_SERVICE_TOKEN")>
+                      RELAY_PROXY_ADDRESS: http://localhost:7002
               - step:
                   type: Run
                   name: update service config
