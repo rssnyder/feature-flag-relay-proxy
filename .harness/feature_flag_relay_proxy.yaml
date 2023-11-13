@@ -36,9 +36,8 @@ pipeline:
                         envVariables:
                           ACCOUNT_IDENTIFIER: <+account.identifier>
                           ORG_IDENTIFIER: <+org.identifier>
-                          ADMIN_SERVICE_TOKEN: <+secrets.getValue("ADMIN_SERVICE_TOKEN")>
+                          PROXY_KEY: <+secrets.getValue("PROXY_KEY")>
                           AUTH_SECRET: <+secrets.getValue("AUTH_SECRET")>
-                          API_KEYS: <+secrets.getValue("API_KEYS")>
                   - step:
                       type: Run
                       name: test health
