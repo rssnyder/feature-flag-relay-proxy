@@ -3,7 +3,7 @@ version: "3"
 services:
   
   primary:
-    image: "harness/ff-proxy:v2-rc0.3"
+    image: "harness/ff-proxy:v2.0.0-rc.2"
     environment:
       PROXY_KEY: ${PROXY_KEY}
       READ_REPLICA: false
@@ -14,7 +14,7 @@ services:
       - ${PRIMARY_PORT:-7000}:7000
   
   replica0:
-    image: "harness/ff-proxy:v2-rc0.3"
+    image: "harness/ff-proxy:v2.0.0-rc.2"
     environment:
       LOG_LEVEL: INFO
       READ_REPLICA: true
@@ -25,7 +25,7 @@ services:
       - ${REPLICA0_PORT:-7001}:7000
   
   replica1:
-    image: "harness/ff-proxy:v2-rc0.3"
+    image: "harness/ff-proxy:v2.0.0-rc.2"
     environment:
       LOG_LEVEL: INFO
       READ_REPLICA: true
