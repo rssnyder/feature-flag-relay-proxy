@@ -46,11 +46,11 @@ pipeline:
                       spec:
                         shell: Sh
                         command: |
-                          curl -s localhost:7000/health
+                          curl -s localhost:<+matrix.port>/health
 
-                          curl -s localhost:7000/health | grep "healthy"
+                          curl -s localhost:<+matrix.port>/health | grep "healthy"
 
-                          curl -s localhost:7000/health | grep "CONNECTED"
+                          curl -s localhost:<+matrix.port>/health | grep "CONNECTED"
                       failureStrategies:
                         - onFailure:
                             errors:
@@ -64,6 +64,12 @@ pipeline:
                                 onRetryFailure:
                                   action:
                                     type: MarkAsFailure
+                      strategy:
+                        matrix:
+                          port:
+                            - 7000
+                            - 7001
+                            - 7002
               - step:
                   type: Run
                   name: run test
@@ -78,6 +84,13 @@ pipeline:
                       HARNESS_PROJECT_ID: <+project.identifier>
                       HARNESS_ENVIRONMENT_ID: development
                       HARNESS_PLATFORM_API_KEY: <+secrets.getValue("ADMIN_SERVICE_TOKEN")>
+                      RELAY_PROXY_ADDRESS: http://localhost:<+matrix.port>
+                  strategy:
+                    matrix:
+                      port:
+                        - 7000
+                        - 7001
+                        - 7002
               - step:
                   type: Run
                   name: update service config
