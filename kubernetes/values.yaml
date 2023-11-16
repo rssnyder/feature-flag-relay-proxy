@@ -12,6 +12,7 @@ service:
 replicas:
   min: <+serviceVariables.replicas>
   max: <+serviceVariables.maxReplicas>
+  targetCPUUtilizationPercentage: <+serviceVariables.targetCPUUtilizationPercentage>
 
 proxyKey: <+secrets.getValue("PROXY_KEY")>
 authSecret: <+secrets.getValue("AUTH_SECRET")>
