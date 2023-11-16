@@ -6,6 +6,8 @@ image: <+artifact.image>
 service:
   type: <+serviceVariables.serviceType>
   port: <+serviceVariables.servicePort>
+  # create a service for the writer proxy, not to be used by applications
+  enableWriterService: <+serviceVariables.enableWriterService>
 
 replicas: <+serviceVariables.replicas>
 

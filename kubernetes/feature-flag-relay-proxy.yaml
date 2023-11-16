@@ -71,11 +71,28 @@ spec:
         - name: sdk
           containerPort: 7000
 
+{{ if .Values.service.enableWriterService }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.app }}
+  namespace: {{ .Values.namespace }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Values.app }}
+  ports:
+  - name: sdk
+    port: {{ .Values.service.port }}
+    targetPort: sdk
+{{- end }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app }}-read-replica
   namespace: {{ .Values.namespace }}
 spec:
   type: {{ .Values.service.type }}

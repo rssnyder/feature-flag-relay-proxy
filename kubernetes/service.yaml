@@ -1,11 +1,8 @@
 service:
-  name: feature_flag_relay_proxy
-  identifier: feature_flag_relay_proxy
-  orgIdentifier: Harness_Community
-  projectIdentifier: Feature_Flags
-  description: example service for deploying the relay proxy
-  tags:
-    source: harness-community/feature-flag-relay-proxy
+  name: ff relay proxy
+  identifier: ff_relay_proxy
+  orgIdentifier: default
+  projectIdentifier: home_lab
   serviceDefinition:
     spec:
       manifests:
@@ -16,12 +13,12 @@ service:
               store:
                 type: Github
                 spec:
-                  connectorRef: org.harness_community_github
+                  connectorRef: account.Github
                   gitFetchType: Branch
                   paths:
                     - kubernetes/feature-flag-relay-proxy.yaml
-                  repoName: feature-flag-relay-proxy
-                  branch: feat/pipeline
+                  repoName: harness-community/feature-flag-relay-proxy
+                  branch: feat/v2
               valuesPaths:
                 - kubernetes/values.yaml
               skipResourceVersioning: false
@@ -31,21 +28,41 @@ service:
           primaryArtifactRef: <+input>
           sources:
             - spec:
-                connectorRef: org.harness_community_dockerhub
+                connectorRef: account.dockerhub
                 imagePath: harness/ff-proxy
-                tag: 1.0.2
+                tag: <+input>
                 digest: ""
               identifier: main
               type: DockerRegistry
       variables:
-        - name: port
-          type: String
-          description: sdk connection port
-          required: true
-          value: "7000"
         - name: replicas
           type: String
-          description: number of pods
+          description: ""
           required: true
           value: "2"
+        - name: serviceType
+          type: String
+          description: ""
+          required: false
+          value: LoadBalancer
+        - name: redisAddress
+          type: String
+          description: ""
+          required: false
+          value: redis.redis.svc.cluster.local:6379
+        - name: servicePort
+          type: String
+          description: ""
+          required: false
+          value: "7000"
+        - name: logLevel
+          type: String
+          description: ""
+          required: false
+          value: DEBUG
+        - name: enableWriterService
+          type: String
+          description: ""
+          required: false
+          value: "false"
     type: Kubernetes
