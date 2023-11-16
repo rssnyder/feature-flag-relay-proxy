@@ -12,6 +12,10 @@ resources for deploying the relay proxy for harness feature flags
 
 `.harness` a harness pipeline that tests all these configurations
 
+# proxy image
+
+[v2 proxy image in dockerhub](https://hub.docker.com/layers/harness/ff-proxy/v2.0.0-rc.3/images/sha256-cc1f39cfc29f6762ba1f06b2edea56553640128d5e94a7befd05c4d6eed82de0?context=explore)
+
 # general guidance
 
 the two things you will need to deploy the relay proxy:
