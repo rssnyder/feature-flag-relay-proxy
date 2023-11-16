@@ -9,7 +9,9 @@ service:
   # create a service for the writer proxy, not to be used by applications
   enableWriterService: <+serviceVariables.enableWriterService>
 
-replicas: <+serviceVariables.replicas>
+replicas:
+  min: <+serviceVariables.replicas>
+  max: <+serviceVariables.maxReplicas>
 
 proxyKey: <+secrets.getValue("PROXY_KEY")>
 authSecret: <+secrets.getValue("AUTH_SECRET")>
