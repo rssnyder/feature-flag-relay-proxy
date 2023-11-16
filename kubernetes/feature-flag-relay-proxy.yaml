@@ -79,20 +79,20 @@ spec:
         - name: sdk
           containerPort: 7000
 
----
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
-metadata:
-   name: {{ .Values.app }}
-   namespace: {{ .Values.namespace }}
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: {{ .Values.app }}-read-replica
-  minReplicas: {{ .Values.replicas.min }}
-  maxReplicas: {{ .Values.replicas.max }}
-  targetCPUUtilizationPercentage: {{ .Values.replicas.targetCPUUtilizationPercentage }}
+# ---
+# apiVersion: autoscaling/v1
+# kind: HorizontalPodAutoscaler
+# metadata:
+#    name: {{ .Values.app }}
+#    namespace: {{ .Values.namespace }}
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: {{ .Values.app }}-read-replica
+#   minReplicas: {{ .Values.replicas.min }}
+#   maxReplicas: {{ .Values.replicas.max }}
+#   targetCPUUtilizationPercentage: {{ .Values.replicas.targetCPUUtilizationPercentage }}
 
 {{ if .Values.service.enableWriterService }}
 ---
