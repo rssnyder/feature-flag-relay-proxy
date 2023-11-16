@@ -27,15 +27,21 @@ curl "https://app.harness.io/gateway/cf/admin/proxy/keys?accountIdentifier=$HARN
 --header "x-api-key: $HARNESS_PLATFORM_API_KEY" \
 --data '
 {
-  "name": "default",
-  "identifier": "default",
-  "description": "proxy key for the default org",
+  "name": "TestKey",
+  "identifier": "TestKey",
+  "description": "A description",
   "organizations": {
-    "default": {
-      "projects": {
-        "home_lab": { "scope": "all" }
+      "ThisOrg": { 
+          "projects": { 
+              "thisProject": { "scope": "selected", "environments": ["RealProd", "Test"] }
+              "thatProject": { "scope": "all" }
+          }
+      },
+       "ThatOrg": { 
+          "projects": { 
+              "thisProject": { "scope": "all" }
+          }
       }
-    }
   }
 }'
 ```
