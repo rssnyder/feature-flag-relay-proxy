@@ -18,6 +18,10 @@ spec:
     metadata:
       labels:
         app: {{ .Values.app }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "7000"
+        prometheus.io/path: "/metrics"
     spec:
       containers:
       - name: relay-proxy
@@ -53,6 +57,10 @@ spec:
     metadata:
       labels:
         app: {{ .Values.app }}-read-replica
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "7000"
+        prometheus.io/path: "/metrics"
     spec:
       containers:
       - name: relay-proxy-read-replica
