@@ -36,10 +36,10 @@ service:
               type: DockerRegistry
       variables:
         - name: replicas
-          type: String
+          type: Number
           description: ""
           required: true
-          value: "2"
+          value: 2
         - name: serviceType
           type: String
           description: ""
@@ -49,7 +49,7 @@ service:
           type: String
           description: ""
           required: false
-          value: redis.redis.svc.cluster.local:6379
+          value: redis.redis:6379
         - name: servicePort
           type: String
           description: ""
@@ -64,5 +64,5 @@ service:
           type: String
           description: ""
           required: false
-          value: "false"
+          value: "true"
     type: Kubernetes
