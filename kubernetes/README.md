@@ -1,6 +1,6 @@
 # kubernetes deployment example
 
-![image](https://github.com/harness-community/feature-flag-relay-proxy/assets/7338312/0030e8b6-6c6a-4974-8b8e-5ab75c2d6775)
+![image](https://github.com/harness-community/feature-flag-relay-proxy/assets/7338312/ba9898d9-175a-4ecc-85fb-23c145f66995)
 
 ## deployment.yaml
 
