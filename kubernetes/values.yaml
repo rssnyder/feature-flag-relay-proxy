@@ -16,9 +16,9 @@ service:
 
 # how many read replicas to use
 replicas: <+serviceVariables.replicas>
-  # min: <+serviceVariables.replicas>
-  # max: <+serviceVariables.maxReplicas>
-  # targetCPUUtilizationPercentage: <+serviceVariables.targetCPUUtilizationPercentage>
+  # min: 
+  # max: 
+  # targetCPUUtilizationPercentage: 
 
 # proxy key from harness to configure the writer proxy
 proxyKey: <+secrets.getValue("PROXY_KEY")>
