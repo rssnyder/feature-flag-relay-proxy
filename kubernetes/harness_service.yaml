@@ -16,7 +16,7 @@ service:
                   connectorRef: account.Github
                   gitFetchType: Branch
                   paths:
-                    - kubernetes/feature-flag-relay-proxy.yaml
+                    - kubernetes/deployment.yaml
                   repoName: harness-community/feature-flag-relay-proxy
                   branch: feat/v2
               valuesPaths:
