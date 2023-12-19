@@ -15,7 +15,7 @@ service:
   enableWriterService: <+serviceVariables.enableWriterService>
 
 # how many read replicas to use
-replicas: 2
+replicas: <+serviceVariables.replicas>
   # min: <+serviceVariables.replicas>
   # max: <+serviceVariables.maxReplicas>
   # targetCPUUtilizationPercentage: <+serviceVariables.targetCPUUtilizationPercentage>
