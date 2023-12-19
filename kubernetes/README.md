@@ -6,7 +6,14 @@
 
 deploy the relay proxy to kubernetes using this manifest
 
-there is an example `values.yaml` included
+resources included:
+- namespace
+- deployment: for the main relay proxy, which fetches values from harness and stores them in redis
+- deployment: the the read replicas, which expose the information in redis to ff sdk connections
+- service: for exposing the main relay proxy (only needed for testing)
+- service: for exposing the read replicas, for the ff sdk to connect to
+
+see the `values.yaml` file for the inputs needed to deploy this manifest
 
 ## redis
 
