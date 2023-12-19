@@ -2,7 +2,7 @@
 
 ![image](https://github.com/harness-community/feature-flag-relay-proxy/assets/7338312/0030e8b6-6c6a-4974-8b8e-5ab75c2d6775)
 
-## feature-flag-relay-proxy.yaml
+## deployment.yaml
 
 deploy the relay proxy to kubernetes using this manifest
 
@@ -21,6 +21,8 @@ in production deployments, redis should be used as a shared cache
 
 deploy redis based on your internal standards
 
-## service.yaml
+## harness_service.yaml
 
 an example harness service yaml for deploying the relay proxy
+
+you will need to change the project/org, github, and docker connector ids to match your setup
