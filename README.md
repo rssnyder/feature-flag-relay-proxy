@@ -37,7 +37,7 @@ curl "https://app.harness.io/gateway/cf/admin/proxy/keys?accountIdentifier=$HARN
   "organizations": {
       "ThisOrg": { 
           "projects": { 
-              "thisProject": { "scope": "selected", "environments": ["RealProd", "Test"] }
+              "thisProject": { "scope": "selected", "environments": ["RealProd", "Test"] },
               "thatProject": { "scope": "all" }
           }
       },
