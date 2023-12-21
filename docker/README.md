@@ -10,7 +10,7 @@ redis is included and should be used in production deployment
 
 ## environment
 
-`PROXY_KEY` (required):
+`PROXY_KEY` (required): 
 `AUTH_SECRET` (required): used to sign JWT tokens that the proxy generates during /auth requests
 `PRIMARY_PORT` (7000): port for accessing primary instance
 `REPLICA0_PORT` (7001): port for accessing replica instance

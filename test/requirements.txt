@@ -1,2 +1,4 @@
 harness-featureflags
 requests
+fastapi
+uvicorn[standard]
