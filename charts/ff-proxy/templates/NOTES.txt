@@ -21,6 +21,7 @@ Get the writer sdk URL by running these commands:
   echo "Use http://127.0.0.1:8080 as your relay proxy URL"
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
 {{- end }}
+Warning: Using the proxy in single pod mode (not leveraging read replicas) is not recommended for production
 {{- end }}
 
 {{- if .Values.readReplica.enabled }}
