@@ -91,6 +91,17 @@ Define the auth secret name
 {{- end }}
 
 {{/*
+Define the redis password name
+*/}}
+{{- define "ff-proxy.redisPassword" -}}
+{{- if not .Values.redis.existingPassword }}
+{{- include "ff-proxy.fullname" . }}-redis-password
+{{- else }}
+{{- .Values.redis.existingPassword | trunc 63 | toString }}
+{{- end }}
+{{- end }}
+
+{{/*
 Define resource names
 */}}
 {{- define "ff-proxy.writer.name" -}}

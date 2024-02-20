@@ -1,4 +1,4 @@
-{{- if .Values.writer.service.enabled }}
+{{- if and .Values.writer.service.enabled (not .Values.readReplica.enabled) }}
 Get the writer sdk URL by running these commands:
 {{- if and .Values.writer.ingress.enabled .Values.writer.service.enabled }}
 {{- range $host := .Values.writer.ingress.hosts }}

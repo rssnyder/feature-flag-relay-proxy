@@ -6,7 +6,6 @@
 proxyKey:
 
 # Use existing Secret which stores PROXY_KEY key instead of creating a new one. The value should be set with the `PROXY_KEY` key inside the secret.
-## The use of external secrets allows you to manage credentials from external tools like Vault, 1Password, SealedSecrets, among other.
 ## If set, this parameter takes precedence over "proxyKey".
 existingProxyKey:
 
@@ -14,12 +13,17 @@ existingProxyKey:
 authSecret:
 
 # Use existing Secret which stores AUTH_SECRET key instead of creating a new one. The value should be set with the `AUTH_SECRET` key inside the secret.
-## The use of external secrets allows you to manage credentials from external tools like Vault, 1Password, SealedSecrets, among other.
 ## If set, this parameter takes precedence over "authSecret".
 existingAuthSecret:
 
 # The host and port of the redis server you want your Proxy to connect to
-redisAddress:
+redis:
+  address:
+  db: 0
+  password:
+  # Use existing Secret which stores REDIS_PASSWORD key instead of creating a new one. The value should be set with the `REDIS_PASSWORD` key inside the secret.
+  ## If set, this parameter takes precedence over "redis.password".
+  existingPassword:
 
 image:
   repository: harness/ff-proxy
@@ -181,3 +185,41 @@ readReplica:
     # - name: certs
     #   persistentVolumeClaim:
     #     claimName: harness-delegate-ng-certs
+
+# The url of the FF Client Service running in Harness Saas that the Proxy commuincates with to fetch configuration data
+clientService:
+
+# The url of the FF Metric Service running in Harness Saas that the Proxy forwards SDK metric data onto
+metricService:
+
+# Controls how frequently in seconds the Primary Proxy posts metrics to Harness. Setting this to 0 will disable metrics forwarding from the Proxy to Saas and the absolute minimum that it can be set to is 60 seconds. It's also worth knowing that the Primary forwards metrics on to Harness Saas whenever 60 seconds has elapsed OR it has received 1MB worth of data. So if there's a high volume of metrics data going through your Proxy you may see metrics requests forwarded to Harness Saas more frequently than the value you set here
+metricPostDuration:
+
+# How often in seconds the proxy pings its health function. Set to 0 to disable
+heartbeatInterval:
+
+# Port that the Proxy http server runs on inside the Relay Proxy container. This should only be changed for specific local dev purposes. The Pushpin Proxy that runs inside the Relay Proxy container expects the Proxy HTTP server to be available on port 8000. If you change this in a Production environment it is likely that SDK traffic won't be able to reach your Proxy
+port:
+
+# If true the proxy will use the tlsCert and tlsKey to run with https enabled
+tls:
+  enabled: false
+  # # Path to tls cert file
+  certPath:
+  # Path to tls key file
+  keyPath:
+
+# Contorls whether or not authentication is enforced on the Proxy's endpoints. This is ONLY used for local dev purposes to aid debugging, never set this to true in Production environments
+bypassAuth:
+
+# Contorls the logging level, valid options are INFO, DEBUG & ERROR
+logLevel:
+
+# Enables the GCP Cloud Profiler. If you're using the Profiler in GCP to monitor your applications CPU & Memory usage then setting this to true will mean the Proxy will appear there along side your other applications. If you aren't using the GCP Profiler then you can ignore this setting
+gcpProfilerEnabled:
+
+# Enables the golang profiler on port 6060. This is also only used for local development and we don't recommend enabling this in your production envrionments
+pprof:
+
+# Sets the max length of the redis stream that replicas use to send metrics to the Primary
+metricsStreamMaxLen:

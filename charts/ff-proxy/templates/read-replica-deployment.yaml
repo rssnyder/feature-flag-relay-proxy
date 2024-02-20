@@ -54,6 +54,10 @@ spec:
                 name: {{ include "ff-proxy.proxyKey" . }}
             - secretRef:
                 name: {{ include "ff-proxy.authSecret" . }}
+            {{- if or .Values.redis.password .Values.redis.existingPassword}}
+            - secretRef:
+                name: {{ include "ff-proxy.redisPassword" . }}
+            {{- end }}
           {{- with .Values.readReplica.custom_envs }}
           env:
             {{- toYaml . | nindent 12 }}
