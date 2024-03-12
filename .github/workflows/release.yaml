@@ -2,6 +2,11 @@ name: Release Charts
 
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        type: string
+        required: true
+        default: 'main'
 
 jobs:
   release:
@@ -13,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: feat/v2-chart
+          ref: ${{ inputs.ref }} 
 
       - name: Configure Git
         run: |
@@ -26,6 +31,6 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:
-          pages_branch: deploy-chart
+          pages_branch: main
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
