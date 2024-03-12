@@ -6,7 +6,7 @@ on:
       ref:
         type: string
         required: true
-        default: 'main'
+        default: 'deploy-chart'
 
 jobs:
   release:
