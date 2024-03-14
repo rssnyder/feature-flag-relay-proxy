@@ -3,6 +3,16 @@ entries:
   ff-proxy:
   - apiVersion: v2
     appVersion: v2.0.0-rc.13
+    created: "2024-03-14T13:14:16.845678728Z"
+    description: A Helm chart for the Harness Feature Flag Relay Proxy (v2)
+    digest: 51b48b479b5061809fa7fb2adc5929bc5e5f7ec527a6fd351524b19a3a5218f8
+    name: ff-proxy
+    type: application
+    urls:
+    - https://github.com/rssnyder/feature-flag-relay-proxy/releases/download/ff-proxy-0.1.2/ff-proxy-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: v2.0.0-rc.13
     created: "2024-03-12T14:50:34.610101063Z"
     description: A Helm chart for the Harness Feature Flag Relay Proxy (v2)
     digest: 31899c166051e3e84fa0c5d9ae24fd4a04b7d3998ad4a4a327b8f3b3d54a2f1f
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/rssnyder/feature-flag-relay-proxy/releases/download/ff-proxy-0.1.0/ff-proxy-0.1.0.tgz
     version: 0.1.0
-generated: "2024-03-12T14:50:34.610113696Z"
+generated: "2024-03-14T13:14:16.845716909Z"
